@@ -36,7 +36,8 @@ python3 -m pip install --no-cache-dir \
   ultralytics==8.3.198 \
   wandb==0.21.4 \
   pycocotools==2.0.10 \
-  supervision==0.26.1
+  supervision==0.26.1 \
+  albumentations==2.0.8
 
 # ========= (Opcional) Dependencias base para Detectron2 =========
 if [[ "${INSTALL_D2_DEPS}" == "1" ]]; then
