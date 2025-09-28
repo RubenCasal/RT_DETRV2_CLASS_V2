@@ -12,6 +12,10 @@ It is designed to be **easy to use**, covering everything from dataset preparati
 * [🎛️ Training Arguments](documentation/training_arguments.md)
 * [📊 Evaluation Metrics](documentation/evaluation_metrics.md)
 * [🔍 Inference](documentation/inference.md)
+* [🌱 Data Augmentation](documentation/data_augmentation.md)
+
+
+
 
 ---
 
