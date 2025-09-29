@@ -18,7 +18,7 @@ CKPT = "PekingU/rtdetr_v2_r50vd"
 
 if USE_WANDB:
     
-    WANDB_API_KEY = "78d292744788af62441ee14891bd488ef500e3b6"
+    WANDB_API_KEY = "YOUR_API_KEY"
     os.environ["WANDB_API_KEY"] = WANDB_API_KEY
     wandb.init(project=WANDB_PROJECT, name=WANDB_RUN_NAME)
 
