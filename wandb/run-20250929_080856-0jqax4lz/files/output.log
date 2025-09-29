@@ -1,0 +1,126 @@
+  1%|█▏                                                                                                                                                  | 125/15000 [01:53<4:15:02,  1.03s/it]Traceback (most recent call last):
+  File "/home/rcasal/Desktop/projects/PtFue/detvr2_training/RT_DETRV2_CLASS_Refactor/train_model.py", line 162, in <module>                                     | 9/50 [00:01<00:10,  3.89it/s]
+    trainer.train()
+  File "/home/rcasal/Desktop/projects/PtFue/detvr2_training/RT_DETRV2_CLASS_Refactor/rt_detrv2_class.py", line 379, in train
+    return self.trainer.train()
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/transformers/trainer.py", line 2328, in train
+    return inner_training_loop(
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/transformers/trainer.py", line 2754, in _inner_training_loop
+    self._maybe_log_save_evaluate(
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/transformers/trainer.py", line 3227, in _maybe_log_save_evaluate
+    metrics = self._evaluate(trial, ignore_keys_for_eval)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/transformers/trainer.py", line 3176, in _evaluate
+    metrics = self.evaluate(ignore_keys=ignore_keys_for_eval)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/transformers/trainer.py", line 4469, in evaluate
+    output = eval_loop(
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/transformers/trainer.py", line 4665, in evaluation_loop
+    losses, logits, labels = self.prediction_step(model, inputs, prediction_loss_only, ignore_keys=ignore_keys)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/transformers/trainer.py", line 4881, in prediction_step
+    loss, outputs = self.compute_loss(model, inputs, return_outputs=True)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/transformers/trainer.py", line 4099, in compute_loss
+    outputs = model(**inputs)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/accelerate/utils/operations.py", line 818, in forward
+    return model_forward(*args, **kwargs)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/accelerate/utils/operations.py", line 806, in __call__
+    return convert_to_fp32(self.model_forward(*args, **kwargs))
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/torch/amp/autocast_mode.py", line 44, in decorate_autocast
+    return func(*args, **kwargs)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/transformers/models/rt_detr_v2/modeling_rt_detr_v2.py", line 1920, in forward
+    outputs = self.model(
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/transformers/models/rt_detr_v2/modeling_rt_detr_v2.py", line 1539, in forward
+    features = self.backbone(pixel_values, pixel_mask)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/transformers/models/rt_detr_v2/modeling_rt_detr_v2.py", line 865, in forward
+    features = self.model(pixel_values).feature_maps
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/transformers/models/rt_detr/modeling_rt_detr_resnet.py", line 374, in forward
+    outputs = self.encoder(embedding_output, output_hidden_states=True, return_dict=True)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/transformers/models/rt_detr/modeling_rt_detr_resnet.py", line 291, in forward
+    return BaseModelOutputWithNoAttention(
+  File "<string>", line 5, in __init__
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/transformers/utils/generic.py", line 381, in __post_init__
+    class_fields = fields(self)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/dataclasses.py", line 1202, in fields
+    return tuple(f for f in fields.values() if f._field_type is _FIELD)
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/home/rcasal/Desktop/projects/PtFue/detvr2_training/RT_DETRV2_CLASS_Refactor/train_model.py", line 162, in <module>
+    trainer.train()
+  File "/home/rcasal/Desktop/projects/PtFue/detvr2_training/RT_DETRV2_CLASS_Refactor/rt_detrv2_class.py", line 379, in train
+    return self.trainer.train()
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/transformers/trainer.py", line 2328, in train
+    return inner_training_loop(
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/transformers/trainer.py", line 2754, in _inner_training_loop
+    self._maybe_log_save_evaluate(
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/transformers/trainer.py", line 3227, in _maybe_log_save_evaluate
+    metrics = self._evaluate(trial, ignore_keys_for_eval)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/transformers/trainer.py", line 3176, in _evaluate
+    metrics = self.evaluate(ignore_keys=ignore_keys_for_eval)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/transformers/trainer.py", line 4469, in evaluate
+    output = eval_loop(
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/transformers/trainer.py", line 4665, in evaluation_loop
+    losses, logits, labels = self.prediction_step(model, inputs, prediction_loss_only, ignore_keys=ignore_keys)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/transformers/trainer.py", line 4881, in prediction_step
+    loss, outputs = self.compute_loss(model, inputs, return_outputs=True)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/transformers/trainer.py", line 4099, in compute_loss
+    outputs = model(**inputs)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/accelerate/utils/operations.py", line 818, in forward
+    return model_forward(*args, **kwargs)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/accelerate/utils/operations.py", line 806, in __call__
+    return convert_to_fp32(self.model_forward(*args, **kwargs))
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/torch/amp/autocast_mode.py", line 44, in decorate_autocast
+    return func(*args, **kwargs)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/transformers/models/rt_detr_v2/modeling_rt_detr_v2.py", line 1920, in forward
+    outputs = self.model(
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/transformers/models/rt_detr_v2/modeling_rt_detr_v2.py", line 1539, in forward
+    features = self.backbone(pixel_values, pixel_mask)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/transformers/models/rt_detr_v2/modeling_rt_detr_v2.py", line 865, in forward
+    features = self.model(pixel_values).feature_maps
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/transformers/models/rt_detr/modeling_rt_detr_resnet.py", line 374, in forward
+    outputs = self.encoder(embedding_output, output_hidden_states=True, return_dict=True)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/transformers/models/rt_detr/modeling_rt_detr_resnet.py", line 291, in forward
+    return BaseModelOutputWithNoAttention(
+  File "<string>", line 5, in __init__
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/site-packages/transformers/utils/generic.py", line 381, in __post_init__
+    class_fields = fields(self)
+  File "/home/rcasal/anaconda3/envs/tracking/lib/python3.10/dataclasses.py", line 1202, in fields
+    return tuple(f for f in fields.values() if f._field_type is _FIELD)
+KeyboardInterrupt

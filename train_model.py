@@ -1,7 +1,3 @@
-# ==============================
-# train_model_finetuned.py
-# ==============================
-
 from pathlib import Path
 from math import ceil
 import os
@@ -15,15 +11,16 @@ import wandb
 from utils import extract_dataset_labels
 import albumentations as A
 
-USE_WANDB = False
+USE_WANDB = True
 WANDB_PROJECT = "Pt-Fue"
-WANDB_RUN_NAME = "rtdetrv2-coco-pretrained"
+WANDB_RUN_NAME = "rtdetrv2-coco-pretrained2"
 CKPT = "PekingU/rtdetr_v2_r50vd"
 
 if USE_WANDB:
-    # Read your API key from the environment; do not hardcode secrets.
-    if os.environ.get("WANDB_API_KEY"):
-        wandb.init(project=WANDB_PROJECT, name=WANDB_RUN_NAME)
+    
+    WANDB_API_KEY = "78d292744788af62441ee14891bd488ef500e3b6"
+    os.environ["WANDB_API_KEY"] = WANDB_API_KEY
+    wandb.init(project=WANDB_PROJECT, name=WANDB_RUN_NAME)
 
 # Dataset / output
 ROOT = "/home/rcasal/Desktop/projects/PtFue/detvr2_training/dataset_prueba2"
@@ -34,7 +31,7 @@ TRAIN_BATCH = 2
 VAL_BATCH = 2
 GRAD_ACCUM = 2
 EPOCHS = 60
-LEARNING_RATE = 1e-4
+LEARNING_RATE = 1e-6
 WEIGHT_DECAY = 0.005
 WARMUP_RATIO = 0.1
 USE_FP16 = False
@@ -44,14 +41,14 @@ EVAL_RATE_EPOCHS = 0.5
 
 # Loss settings set via model.config inside the trainer
 USE_FOCAL_LOSS = True
-FOCAL_GAMMA = 2.0
-FOCAL_ALPHA = 0.5
-LABEL_SMOOTHING_IN_MODEL = 0.05
+FOCAL_GAMMA = 1.0
+FOCAL_ALPHA = 0.25
+LABEL_SMOOTHING_IN_MODEL = 0.02
 
 # --- Non-standard config hypers (applied to model.config) ---
-EOS_COEF = 1e-4             # lower "no-object/background" weight to avoid over-suppressing logits
-MATCHER_CLASS_COST = 4.0    # Hungarian matcher: class term weight
-MATCHER_BBOX_COST = 3.0     # Hungarian matcher: bbox term weight
+EOS_COEF = 1e-5             # lower "no-object/background" weight to avoid over-suppressing logits
+MATCHER_CLASS_COST = 2.0    # Hungarian matcher: class term weight
+MATCHER_BBOX_COST = 4.0     # Hungarian matcher: bbox term weight
 CLASS_LOSS_COEF = 2.0       # classification loss weight in the total loss
 
 # Labels / annotations
@@ -91,8 +88,8 @@ training_arguments = dict(
     data_seed=42,
     max_grad_norm=1.0,
     # Differential LRs
-    backbone_lr=3e-5,
-    head_lr=3e-4,
+    backbone_lr=1e-6,
+    head_lr=1e-5,
     load_best_model_at_end=True,
     metric_for_best_model="eval_coco/AP",
     greater_is_better=True,
@@ -158,7 +155,7 @@ trainer.trainer.add_callback(
         trainer.id2label,
         infer_size=IMAGE_SIZE,
         k=8,
-        thr=0.07,
+        thr=0.01,
         log_to_wandb=USE_WANDB,
     )
 )

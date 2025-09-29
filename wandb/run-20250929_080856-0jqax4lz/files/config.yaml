@@ -1,0 +1,683 @@
+_name_or_path:
+    value: PekingU/rtdetr_v2_r50vd
+_wandb:
+    value:
+        cli_version: 0.21.4
+        e:
+            6h7h0c20fnx7z19xliuypvb5zxkbso7v:
+                codePath: train_model.py
+                codePathLocal: train_model.py
+                cpu_count: 10
+                cpu_count_logical: 12
+                cudaVersion: "13.0"
+                disk:
+                    /:
+                        total: "351259643904"
+                        used: "300443422720"
+                email: u3409518323@gmail.com
+                executable: /home/rcasal/anaconda3/envs/tracking/bin/python
+                git:
+                    commit: f78de0bde4c8b40a7989060db26489c4fcd4ad77
+                    remote: git@github.com:RubenCasal/RT_DETRV2_CLASS_V2.git
+                gpu: NVIDIA T550 Laptop GPU
+                gpu_count: 1
+                gpu_nvidia:
+                    - architecture: Turing
+                      cudaCores: 1024
+                      memoryTotal: "4294967296"
+                      name: NVIDIA T550 Laptop GPU
+                      uuid: GPU-7b70e6a1-3fb5-4478-c756-9d97a3b7650e
+                host: HWPC0389LINUX
+                memory:
+                    total: "16439365632"
+                os: Linux-6.8.0-84-generic-x86_64-with-glibc2.35
+                program: /home/rcasal/Desktop/projects/PtFue/detvr2_training/RT_DETRV2_CLASS_Refactor/train_model.py
+                python: CPython 3.10.18
+                root: /home/rcasal/Desktop/projects/PtFue/detvr2_training/RT_DETRV2_CLASS_Refactor
+                startedAt: "2025-09-29T06:08:56.028519Z"
+                writerId: 6h7h0c20fnx7z19xliuypvb5zxkbso7v
+        m:
+            - "1": train/global_step
+              "6":
+                - 3
+              "7": []
+            - "2": '*'
+              "5": 1
+              "6":
+                - 1
+              "7": []
+        python_version: 3.10.18
+        t:
+            "1":
+                - 1
+                - 5
+                - 11
+                - 41
+                - 49
+                - 51
+                - 53
+                - 71
+                - 80
+            "2":
+                - 1
+                - 5
+                - 11
+                - 41
+                - 49
+                - 51
+                - 53
+                - 71
+                - 80
+            "3":
+                - 7
+                - 19
+                - 66
+            "4": 3.10.18
+            "5": 0.21.4
+            "6": 4.56.1
+            "9":
+                "1": transformers_trainer
+            "12": 0.21.4
+            "13": linux-x86_64
+accelerator_config:
+    value:
+        dispatch_batches: null
+        even_batches: true
+        gradient_accumulation_kwargs: null
+        non_blocking: false
+        split_batches: false
+        use_seedable_sampler: true
+activation_dropout:
+    value: 0
+activation_function:
+    value: silu
+adafactor:
+    value: false
+adam_beta1:
+    value: 0.9
+adam_beta2:
+    value: 0.999
+adam_epsilon:
+    value: 1e-08
+add_cross_attention:
+    value: false
+anchor_image_size:
+    value: null
+architectures:
+    value:
+        - RtDetrV2ForObjectDetection
+attention_dropout:
+    value: 0
+auto_find_batch_size:
+    value: false
+auxiliary_loss:
+    value: true
+average_tokens_across_devices:
+    value: false
+backbone:
+    value: null
+backbone_config:
+    value:
+        _name_or_path: ""
+        add_cross_attention: false
+        architectures: null
+        bad_words_ids: null
+        begin_suppress_tokens: null
+        bos_token_id: null
+        chunk_size_feed_forward: 0
+        cross_attention_hidden_size: null
+        decoder_start_token_id: null
+        depths:
+            - 3
+            - 4
+            - 6
+            - 3
+        diversity_penalty: 0
+        do_sample: false
+        downsample_in_bottleneck: false
+        downsample_in_first_stage: false
+        dtype: float32
+        early_stopping: false
+        embedding_size: 64
+        encoder_no_repeat_ngram_size: 0
+        eos_token_id: null
+        exponential_decay_length_penalty: null
+        finetuning_task: null
+        forced_bos_token_id: null
+        forced_eos_token_id: null
+        hidden_act: relu
+        hidden_sizes:
+            - 256
+            - 512
+            - 1024
+            - 2048
+        id2label:
+            "0": LABEL_0
+            "1": LABEL_1
+        is_decoder: false
+        is_encoder_decoder: false
+        label2id:
+            LABEL_0: 0
+            LABEL_1: 1
+        layer_type: bottleneck
+        length_penalty: 1
+        max_length: 20
+        min_length: 0
+        model_type: rt_detr_resnet
+        no_repeat_ngram_size: 0
+        num_beam_groups: 1
+        num_beams: 1
+        num_channels: 3
+        num_return_sequences: 1
+        out_features:
+            - stage2
+            - stage3
+            - stage4
+        out_indices:
+            - 2
+            - 3
+            - 4
+        output_attentions: false
+        output_hidden_states: false
+        output_scores: false
+        pad_token_id: null
+        prefix: null
+        problem_type: null
+        remove_invalid_values: false
+        repetition_penalty: 1
+        return_dict: true
+        return_dict_in_generate: false
+        sep_token_id: null
+        stage_names:
+            - stem
+            - stage1
+            - stage2
+            - stage3
+            - stage4
+        suppress_tokens: null
+        task_specific_params: null
+        temperature: 1
+        tf_legacy_loss: false
+        tie_encoder_decoder: false
+        tie_word_embeddings: true
+        tokenizer_class: null
+        top_k: 50
+        top_p: 1
+        torchscript: false
+        typical_p: 1
+        use_bfloat16: false
+backbone_kwargs:
+    value: null
+bad_words_ids:
+    value: null
+batch_eval_metrics:
+    value: false
+batch_norm_eps:
+    value: 1e-05
+begin_suppress_tokens:
+    value: null
+bf16:
+    value: true
+bf16_full_eval:
+    value: false
+bos_token_id:
+    value: null
+box_noise_scale:
+    value: 1
+chunk_size_feed_forward:
+    value: 0
+cross_attention_hidden_size:
+    value: null
+d_model:
+    value: 256
+data_seed:
+    value: 42
+dataloader_drop_last:
+    value: false
+dataloader_num_workers:
+    value: 8
+dataloader_persistent_workers:
+    value: true
+dataloader_pin_memory:
+    value: true
+dataloader_prefetch_factor:
+    value: null
+ddp_backend:
+    value: null
+ddp_broadcast_buffers:
+    value: null
+ddp_bucket_cap_mb:
+    value: null
+ddp_find_unused_parameters:
+    value: null
+ddp_timeout:
+    value: 1800
+debug:
+    value: []
+decoder_activation_function:
+    value: relu
+decoder_attention_heads:
+    value: 8
+decoder_ffn_dim:
+    value: 1024
+decoder_in_channels:
+    value:
+        - 256
+        - 256
+        - 256
+decoder_layers:
+    value: 6
+decoder_method:
+    value: default
+decoder_n_levels:
+    value: 3
+decoder_n_points:
+    value: 4
+decoder_offset_scale:
+    value: 0.5
+decoder_start_token_id:
+    value: null
+deepspeed:
+    value: null
+disable_custom_kernels:
+    value: true
+disable_tqdm:
+    value: false
+diversity_penalty:
+    value: 0
+do_eval:
+    value: true
+do_predict:
+    value: false
+do_sample:
+    value: false
+do_train:
+    value: false
+dropout:
+    value: 0
+dtype:
+    value: float32
+early_stopping:
+    value: false
+encode_proj_layers:
+    value:
+        - 2
+encoder_activation_function:
+    value: gelu
+encoder_attention_heads:
+    value: 8
+encoder_ffn_dim:
+    value: 1024
+encoder_hidden_dim:
+    value: 256
+encoder_in_channels:
+    value:
+        - 512
+        - 1024
+        - 2048
+encoder_layers:
+    value: 1
+encoder_no_repeat_ngram_size:
+    value: 0
+eos_coefficient:
+    value: 1e-06
+eos_token_id:
+    value: null
+eval_accumulation_steps:
+    value: null
+eval_delay:
+    value: 0
+eval_do_concat_batches:
+    value: true
+eval_on_start:
+    value: false
+eval_size:
+    value: null
+eval_steps:
+    value: 125
+eval_strategy:
+    value: steps
+eval_use_gather_object:
+    value: false
+exponential_decay_length_penalty:
+    value: null
+feat_strides:
+    value:
+        - 8
+        - 16
+        - 32
+finetuning_task:
+    value: null
+focal_loss_alpha:
+    value: 0.75
+focal_loss_gamma:
+    value: 2
+forced_bos_token_id:
+    value: null
+forced_eos_token_id:
+    value: null
+fp16:
+    value: false
+fp16_backend:
+    value: auto
+fp16_full_eval:
+    value: false
+fp16_opt_level:
+    value: O1
+freeze_backbone_batch_norms:
+    value: true
+fsdp:
+    value: []
+fsdp_config:
+    value:
+        min_num_params: 0
+        xla: false
+        xla_fsdp_grad_ckpt: false
+        xla_fsdp_v2: false
+fsdp_min_num_params:
+    value: 0
+fsdp_transformer_layer_cls_to_wrap:
+    value: null
+full_determinism:
+    value: false
+gradient_accumulation_steps:
+    value: 2
+gradient_checkpointing:
+    value: false
+gradient_checkpointing_kwargs:
+    value: null
+greater_is_better:
+    value: true
+group_by_length:
+    value: false
+half_precision_backend:
+    value: auto
+hidden_expansion:
+    value: 1
+hub_always_push:
+    value: false
+hub_model_id:
+    value: null
+hub_private_repo:
+    value: null
+hub_revision:
+    value: null
+hub_strategy:
+    value: every_save
+hub_token:
+    value: <HUB_TOKEN>
+id2label:
+    value:
+        "0": class_0
+        "1": class_1
+        "2": class_2
+ignore_data_skip:
+    value: false
+include_for_metrics:
+    value: []
+include_inputs_for_metrics:
+    value: false
+include_num_input_tokens_seen:
+    value: false
+include_tokens_per_second:
+    value: false
+initializer_bias_prior_prob:
+    value: null
+initializer_range:
+    value: 0.01
+is_decoder:
+    value: false
+is_encoder_decoder:
+    value: true
+jit_mode_eval:
+    value: false
+label_names:
+    value:
+        - labels
+label_noise_ratio:
+    value: 0.5
+label_smoothing_factor:
+    value: 0
+label2id:
+    value:
+        class_0: 0
+        class_1: 1
+        class_2: 2
+layer_norm_eps:
+    value: 1e-05
+learn_initial_query:
+    value: false
+learning_rate:
+    value: 0.0001
+length_column_name:
+    value: length
+length_penalty:
+    value: 1
+liger_kernel_config:
+    value: null
+load_best_model_at_end:
+    value: true
+local_rank:
+    value: 0
+log_level:
+    value: passive
+log_level_replica:
+    value: warning
+log_on_each_node:
+    value: true
+logging_dir:
+    value: rtdetrv2_pretrained_out/runs/Sep29_08-08-55_HWPC0389LINUX
+logging_first_step:
+    value: false
+logging_nan_inf_filter:
+    value: true
+logging_steps:
+    value: 500
+logging_strategy:
+    value: steps
+lr_scheduler_type:
+    value: constant_with_warmup
+matcher_alpha:
+    value: 0.25
+matcher_bbox_cost:
+    value: 3
+matcher_class_cost:
+    value: 4
+matcher_gamma:
+    value: 2
+matcher_giou_cost:
+    value: 2
+max_grad_norm:
+    value: 1
+max_length:
+    value: 20
+max_steps:
+    value: -1
+metric_for_best_model:
+    value: eval_coco/AP
+min_length:
+    value: 0
+model/num_parameters:
+    value: 42733137
+model_type:
+    value: rt_detr_v2
+mp_parameters:
+    value: ""
+neftune_noise_alpha:
+    value: null
+no_cuda:
+    value: false
+no_repeat_ngram_size:
+    value: 0
+normalize_before:
+    value: false
+num_beam_groups:
+    value: 1
+num_beams:
+    value: 1
+num_denoising:
+    value: 100
+num_feature_levels:
+    value: 3
+num_queries:
+    value: 300
+num_return_sequences:
+    value: 1
+num_train_epochs:
+    value: 60
+optim:
+    value: adamw_torch
+optim_args:
+    value: null
+optim_target_modules:
+    value: null
+output_attentions:
+    value: false
+output_dir:
+    value: rtdetrv2_pretrained_out
+output_hidden_states:
+    value: false
+output_scores:
+    value: false
+overwrite_output_dir:
+    value: false
+pad_token_id:
+    value: null
+parallelism_config:
+    value: null
+past_index:
+    value: -1
+per_device_eval_batch_size:
+    value: 2
+per_device_train_batch_size:
+    value: 2
+per_gpu_eval_batch_size:
+    value: null
+per_gpu_train_batch_size:
+    value: null
+positional_encoding_temperature:
+    value: 10000
+prediction_loss_only:
+    value: false
+prefix:
+    value: null
+problem_type:
+    value: null
+push_to_hub:
+    value: false
+push_to_hub_model_id:
+    value: null
+push_to_hub_organization:
+    value: null
+push_to_hub_token:
+    value: <PUSH_TO_HUB_TOKEN>
+ray_scope:
+    value: last
+remove_invalid_values:
+    value: false
+remove_unused_columns:
+    value: false
+repetition_penalty:
+    value: 1
+report_to:
+    value: []
+restore_callback_states_from_checkpoint:
+    value: false
+resume_from_checkpoint:
+    value: null
+return_dict:
+    value: true
+return_dict_in_generate:
+    value: false
+run_name:
+    value: null
+save_on_each_node:
+    value: false
+save_only_model:
+    value: false
+save_safetensors:
+    value: true
+save_steps:
+    value: 125
+save_strategy:
+    value: steps
+save_total_limit:
+    value: null
+seed:
+    value: 42
+sep_token_id:
+    value: null
+skip_memory_metrics:
+    value: true
+suppress_tokens:
+    value: null
+task_specific_params:
+    value: null
+temperature:
+    value: 1
+tf_legacy_loss:
+    value: false
+tf32:
+    value: null
+tie_encoder_decoder:
+    value: false
+tie_word_embeddings:
+    value: true
+tokenizer_class:
+    value: null
+top_k:
+    value: 50
+top_p:
+    value: 1
+torch_compile:
+    value: false
+torch_compile_backend:
+    value: null
+torch_compile_mode:
+    value: null
+torch_empty_cache_steps:
+    value: null
+torchdynamo:
+    value: null
+torchscript:
+    value: false
+tpu_metrics_debug:
+    value: false
+tpu_num_cores:
+    value: null
+transformers_version:
+    value: 4.56.1
+typical_p:
+    value: 1
+use_bfloat16:
+    value: false
+use_cpu:
+    value: false
+use_focal_loss:
+    value: true
+use_ipex:
+    value: false
+use_legacy_prediction_loop:
+    value: false
+use_liger_kernel:
+    value: false
+use_mps_device:
+    value: false
+use_pretrained_backbone:
+    value: false
+use_timm_backbone:
+    value: false
+warmup_ratio:
+    value: 0.1
+warmup_steps:
+    value: 0
+weight_decay:
+    value: 0.005
+weight_loss_bbox:
+    value: 5
+weight_loss_giou:
+    value: 2
+weight_loss_vfl:
+    value: 1
+with_box_refine:
+    value: true

@@ -183,7 +183,9 @@ class RtDetvr2Trainer:
         self.processor = AutoImageProcessor.from_pretrained(
             ckpt_for_processor,
             do_resize=True,
-            size={"height": int(Ht), "width": int(Wt)},
+            size={"max_height": int(Ht), "max_width": int(Wt)},  
+            do_pad=True,
+            pad_size={"height": int(Ht), "width": int(Wt)},      
         )
 
         # Model
