@@ -1,58 +1,120 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+from __future__ import annotations
 from pathlib import Path
-import random, shutil, json
-from PIL import Image
+from typing import List, Dict, Tuple, Optional, Set
+import json
 
-# === CONSTANTES ===
-SRC = Path("/home/rcasal/Desktop/projects/dataset fuerteventura/datasets_internet/full_dataset").resolve()
-DST= Path("/home/rcasal/Desktop/projects/PtFue/detvr2_training/dataset_prueba").resolve()
-N_TRAIN, N_VAL, SEED = 100, 20, 42
+# === CONFIG ===
+SRC  = Path("/home/rcasal/Desktop/projects/PtFue/detvr2_training/RT_DETRV2_CLASS_Refactor/pedestrian_dataset2").resolve()
+DEST = Path("/home/rcasal/Desktop/projects/PtFue/detvr2_training/RT_DETRV2_CLASS_Refactor/pedestrian_dataset(COCO)").resolve()
+CLASS_NAMES: Optional[List[str]] = None      # p.ej.: ["pedestrian"] si quieres fijarlas
+IMG_EXTS: Set[str] = {".jpg",".jpeg",".png",".bmp",".webp",".tif",".tiff"}
+SPLITS = ("train","val")
+SKIP_IF_NO_LABEL = True
 
+# === Utils ===
+def parse_yolo_line(ln: str):
+    p = ln.strip().split()
+    if len(p) < 5: return None
+    try: return int(float(p[0])), float(p[1]), float(p[2]), float(p[3]), float(p[4])
+    except: return None
 
+def yolo_bbox_to_coco_abs(cx, cy, w, h, W, H):
+    x = (cx - w/2.0)*W; y = (cy - h/2.0)*H
+    bw = w*W; bh = h*H
+    # clip
+    if x < 0: bw += x; x = 0
+    if y < 0: bh += y; y = 0
+    if x + bw > W: bw = W - x
+    if y + bh > H: bh = H - y
+    return float(max(0,x)), float(max(0,y)), float(max(0,bw)), float(max(0,bh))
 
-CATS = [{"id":0,"name":"person"},{"id":1,"name":"vehicles"},{"id":2,"name":"boat"}]
-EXTS = {".jpg",".jpeg",".png",".bmp",".webp",".tif",".tiff"}
-# ==================
+def list_images(root: Path) -> List[Path]:
+    return sorted([p for p in root.rglob("*") if p.is_file() and p.suffix.lower() in IMG_EXTS])
 
-(DST/"images/train").mkdir(parents=True, exist_ok=True)
-(DST/"images/val").mkdir(parents=True, exist_ok=True)
-(DST/"labels/train").mkdir(parents=True, exist_ok=True)
-(DST/"labels/val").mkdir(parents=True, exist_ok=True)
-(DST/"annotations").mkdir(parents=True, exist_ok=True)
+def label_path_for(im: Path, img_root: Path, lbl_root: Path) -> Path:
+    return (lbl_root / im.relative_to(img_root)).with_suffix(".txt")
 
-imgs = sorted([p for p in (SRC/"images").iterdir() if p.suffix.lower() in EXTS and p.is_file()])
-pairs = [(im, (SRC/"labels"/(im.stem + ".txt"))) for im in imgs if (SRC/"labels"/(im.stem + ".txt")).exists()]
+# === COCO por split ===
+def build_categories(class_names: Optional[List[str]], classes_seen: Set[int]) -> List[Dict]:
+    if class_names is None:
+        max_id = max(classes_seen) if classes_seen else -1
+        class_names = [f"class_{i}" for i in range(max_id + 1)]
+    return [{"id": i, "name": n} for i, n in enumerate(class_names)]
 
-random.seed(SEED)
-k = min(N_TRAIN + N_VAL, len(pairs))
-sel = random.sample(pairs, k=k)
-train = sel[:min(N_TRAIN, len(sel))]
-val   = sel[min(N_TRAIN, len(sel)):]
+def collect_classes_seen(img_root: Path, lbl_root: Path) -> Set[int]:
+    seen = set()
+    for im in list_images(img_root):
+        lb = label_path_for(im, img_root, lbl_root)
+        if not lb.exists(): 
+            if SKIP_IF_NO_LABEL: continue
+            else:                continue
+        for ln in lb.read_text(encoding="utf-8", errors="ignore").splitlines():
+            r = parse_yolo_line(ln)
+            if r: seen.add(r[0])
+    return seen
 
-def copy_pairs(pairs, dimg, dlbl):
-    for im, lb in pairs:
-        shutil.copy2(im, dimg/im.name)
-        shutil.copy2(lb, dlbl/(im.stem + ".txt"))
+def make_coco_split(split: str, class_names: Optional[List[str]]):
+    img_root = SRC/"images"/split
+    lbl_root = SRC/"labels"/split
+    if not img_root.exists() or not lbl_root.exists():
+        raise SystemExit(f"[ERR] faltan carpetas para split '{split}'")
 
-copy_pairs(train, DST/"images/train", DST/"labels/train")
-copy_pairs(val,   DST/"images/val",   DST/"labels/val")
+    from PIL import Image
 
-def yolo2coco(split_pairs, dimg, dlbl, out_json, cats=CATS):
-    ims, anns, img_id, ann_id = [], [], 1, 1
-    for im_src, _ in split_pairs:
-        im = dimg/im_src.name; lb = dlbl/(im_src.stem + ".txt")
-        W,H = Image.open(im).size
-        ims.append({"id":img_id,"file_name":im.name,"width":W,"height":H})
-        for ln in lb.read_text().splitlines():
-            c,cx,cy,bw,bh = ln.split()
-            cid=int(float(c)); cx,cy,bw,bh=map(float,(cx,cy,bw,bh))
-            x=(cx-bw/2)*W; y=(cy-bh/2)*H; w=bw*W; h=bh*H
-            x=max(0,min(x,W-1)); y=max(0,min(y,H-1)); w=max(0,min(w,W-x)); h=max(0,min(h,H-y))
-            anns.append({"id":ann_id,"image_id":img_id,"category_id":cid,
-                         "bbox":[x,y,w,h],"area":float(w*h),"iscrowd":0})
-            ann_id+=1
-        img_id+=1
-    (DST/"annotations"/out_json).write_text(json.dumps({"images":ims,"annotations":anns,"categories":cats}))
+    # 1) inferir categorías si no se fijan
+    classes_seen = collect_classes_seen(img_root, lbl_root)
+    cats = build_categories(class_names, classes_seen)
+    valid_cat_ids = {c["id"] for c in cats}
 
-yolo2coco(train, DST/"images/train", DST/"labels/train", "train.json")
-yolo2coco(val,   DST/"images/val",   DST/"labels/val",   "val.json")
-print(f"[OK] {DST}")
+    # 2) construir COCO
+    images, annotations = [], []
+    img_id, ann_id = 1, 1
+    imgs = list_images(img_root)
+    if not imgs: raise SystemExit(f"[ERR] sin imágenes en {img_root}")
+
+    for im in imgs:
+        rel_file = im.relative_to(img_root).as_posix()
+        with Image.open(im) as I: W, H = I.size
+        images.append({"id": img_id, "file_name": rel_file, "width": W, "height": H})
+
+        lb = label_path_for(im, img_root, lbl_root)
+        if lb.exists():
+            for ln in lb.read_text(encoding="utf-8", errors="ignore").splitlines():
+                r = parse_yolo_line(ln)
+                if not r: continue
+                cid, cx, cy, bw, bh = r
+                if cid not in valid_cat_ids: 
+                    # si CLASS_NAMES fija y hay ids fuera de rango -> ignora
+                    continue
+                x,y,w,h = yolo_bbox_to_coco_abs(cx,cy,bw,bh,W,H)
+                if w <= 0 or h <= 0: 
+                    continue
+                annotations.append({
+                    "id": ann_id, "image_id": img_id, "category_id": cid,
+                    "bbox": [x,y,w,h], "area": w*h, "iscrowd": 0
+                })
+                ann_id += 1
+        elif not SKIP_IF_NO_LABEL:
+            # nada que añadir, pero la imagen queda en COCO sin anns
+            pass
+        else:
+            # saltada si SKIP_IF_NO_LABEL True (no llegas aquí porque no la añadimos)
+            pass
+
+        img_id += 1
+
+    out = {"images": images, "annotations": annotations, "categories": cats}
+    (DEST/"annotations").mkdir(parents=True, exist_ok=True)
+    out_path = DEST/"annotations"/f"{split}.json"
+    out_path.write_text(json.dumps(out), encoding="utf-8")
+    print(f"[OK] {split}: imgs={len(images)} anns={len(annotations)} → {out_path}")
+
+def main():
+    DEST.mkdir(parents=True, exist_ok=True)
+    for s in SPLITS:
+        make_coco_split(s, CLASS_NAMES)
+
+if __name__ == "__main__":
+    main()
